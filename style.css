@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --primary-color: #4CAF50; /* Green */
+    --secondary-color: #81C784; /* Lighter Green */
+    --background-color: #f4f7f6; /* Light grey-green */
+    --text-color: #333;
+    --light-text-color: #f8f8f8;
+    --container-bg: #ffffff;
+    --user-message-bg: #e1f5fe; /* Light blue */
+    --ai-message-bg: #e8f5e9; /* Light green */
+    --border-radius: 15px;
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: var(--container-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    width: 100%;
+    max-width: 1000px; /* Increased max-width for side-by-side layout */
+    display: flex;
+    flex-direction: column;
+}
+
+.app-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--light-text-color);
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 4px solid var(--primary-color);
+}
+
+.app-header .logo {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.app-header h1 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.8em;
+}
+
+.app-header p {
+    margin-top: 5px;
+    font-weight: 300;
+}
+
+#calculator-area {
+    display: flex;
+    flex-direction: row; /* Arrange chat and summary side-by-side */
+    padding: 20px;
+    gap: 20px; /* Space between chat and summary */
+    flex-grow: 1; /* Allow this area to take available space */
+     min-height: 60vh; /* Ensure minimum height */
+}
+
+#chat-container {
+    flex: 2; /* Make chat area wider */
+    display: flex;
+    flex-direction: column;
+    background-color: #fdfdfd;
+    border-radius: var(--border-radius);
+    border: 1px solid #eee;
+    overflow: hidden; /* Needed for message scrolling */
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between messages */
+     max-height: calc(60vh - 70px); /* Adjust based on input area height */
+}
+
+/* Styling scrollbar */
+#chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#chat-messages::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+#chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
+.message {
+    display: flex;
+    align-items: flex-start; /* Align icon with top of text */
+    gap: 10px;
+    max-width: 85%;
+    word-wrap: break-word;
+}
+
+.message p {
+    margin: 0;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    line-height: 1.5;
+    font-size: 0.95em;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.user-message {
+    align-self: flex-end;
+    flex-direction: row-reverse; /* Icon on the right */
+}
+
+.user-message p {
+    background-color: var(--user-message-bg);
+    color: #01579b; /* Darker blue text */
+    border-bottom-right-radius: 5px; /* Pointy corner effect */
+}
+
+.ai-message {
+    align-self: flex-start;
+}
+
+.ai-message p, .ai-message .typing-dots {
+    background-color: var(--ai-message-bg);
+    color: #1b5e20; /* Darker green text */
+    border-bottom-left-radius: 5px; /* Pointy corner effect */
+}
+
+.message i {
+    font-size: 1.5em;
+    color: var(--primary-color);
+    margin-top: 5px; /* Align icon slightly lower */
+}
+
+.user-message i {
+     color: #0277bd; /* Blue icon for user */
+     /* Hidden by default, could add user avatar later */
+     display: none;
+}
+
+.bot-icon {
+     color: var(--primary-color);
+}
+
+
+#typing-indicator {
+    padding: 0 20px 10px 20px; /* Match chat message padding */
+}
+
+#typing-indicator .message {
+     max-width: 100px; /* Smaller width for typing indicator */
+}
+
+.typing-dots {
+    display: flex;
+    align-items: center;
+    padding: 15px 15px; /* Match message padding */
+    border-radius: var(--border-radius);
+    border-bottom-left-radius: 5px;
+}
+
+.typing-dots span {
+    height: 8px;
+    width: 8px;
+    background-color: #999;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 2px;
+    animation: typing 1.4s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1.0); }
+}
+
+
+#chat-input-area {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #eee;
+    background-color: #fff;
+}
+
+#user-input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-size: 0.95em;
+    transition: border-color 0.3s ease;
+}
+
+#user-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+#send-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#send-button:hover {
+    background-color: #388E3C; /* Darker green */
+    transform: scale(1.1);
+}
+
+#send-button:active {
+     transform: scale(1.0);
+}
+
+
+#footprint-summary {
+    flex: 1; /* Take less space than chat */
+    background-color: #f8f8f8;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    border: 1px solid #e0e0e0;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+     max-height: calc(60vh + 40px); /* Match chat area height roughly */
+     overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+#footprint-summary h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+#footprint-display {
+    background-color: var(--ai-message-bg);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.1em;
+    color: #1b5e20;
+    border: 1px dashed var(--secondary-color);
+    min-height: 80px; /* Ensure space even when empty */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tips-section h3 {
+    color: #e67e22; /* Orange for tips */
+    margin-bottom: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#eco-tip {
+    font-size: 0.9em;
+    line-height: 1.6;
+    color: #555;
+    background-color: #fffadf; /* Light yellow background for tips */
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 4px solid #e67e22;
+}
+
+.app-footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 0.8em;
+    color: #888;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ddd;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Basic Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        max-width: 95%;
+        margin: 10px;
+        padding: 0; /* Remove padding to use full width */
+    }
+
+     body {
+        padding: 0;
+        align-items: flex-start; /* Align to top on mobile */
+    }
+
+    #calculator-area {
+        flex-direction: column; /* Stack chat and summary */
+        padding: 10px;
+        min-height: 0; /* Remove min height */
+    }
+
+    #chat-container {
+        flex: none; /* Remove flex grow */
+        height: 60vh; /* Fixed height for chat */
+        margin-bottom: 15px;
+    }
+
+     #chat-messages {
+        max-height: calc(60vh - 70px); /* Adjust max height */
+    }
+
+
+    #footprint-summary {
+        flex: none; /* Remove flex grow */
+        max-height: none; /* Remove max height */
+    }
+
+    .app-header h1 {
+        font-size: 1.5em;
+    }
+
+     .message {
+        max-width: 95%;
+    }
+
+}
