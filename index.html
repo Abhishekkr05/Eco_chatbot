@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoBot - Carbon Footprint Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <i class="fas fa-leaf logo"></i>
+            <h1>EcoBot Carbon Calculator</h1>
+            <p>Chat with EcoBot to estimate your carbon footprint!</p>
+        </header>
+
+        <div id="calculator-area">
+            <div id="chat-container">
+                <div id="chat-messages">
+                    <!-- Chat messages will appear here -->
+                    <div class="message ai-message">
+                        <i class="fas fa-robot bot-icon"></i>
+                        <p>Hello! I'm EcoBot. I can help you estimate your annual carbon footprint. Let's start with your transportation habits. How do you primarily commute (car, bike, public transport, walk)? And roughly how far is your daily round trip?</p>
+                    </div>
+                </div>
+                 <div id="typing-indicator" class="hidden">
+                    <div class="message ai-message">
+                         <i class="fas fa-robot bot-icon"></i>
+                        <div class="typing-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="chat-input-area">
+                    <input type="text" id="user-input" placeholder="Type your answer here...">
+                    <button id="send-button" aria-label="Send Message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="footprint-summary">
+                <h2>Footprint Summary</h2>
+                <div id="footprint-display">
+                    <p>Your estimated footprint will appear here once calculated.</p>
+                    <!-- Example: <div class="gauge">...</div> or just text -->
+                </div>
+                <div class="tips-section">
+                    <h3><i class="fas fa-lightbulb"></i> Eco Tips</h3>
+                    <p id="eco-tip">EcoBot might offer tips here during the conversation!</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="app-footer">
+            <p>Carbon footprint calculations are estimates. Powered by AI.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
